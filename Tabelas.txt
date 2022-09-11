@@ -1,0 +1,37 @@
+TABELAS
+
+Tabela de Produtos
+{
+    ID
+    title (max 100)
+    description (max 1500)
+    value
+    value_promotion
+    status_promotion max(3)
+    image
+    category max(50)
+    views_total
+    slug
+    frame (em qual pagina de destaques)
+    status max(3)
+}
+
+
+Tabela de Frames
+{
+    ID
+    title (max 100)
+    description (max 1500)
+    slug
+    status max(3)
+}
+
+
+Tabela de Categorias
+{
+    ID
+    title max(60)
+    description max(1000)
+    slugs
+    status max(3)
+}

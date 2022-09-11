@@ -1,0 +1,272 @@
+/* IMAGEM DOS PRODUTOS */
+.space-img-product-page {
+    width: 100%;
+    max-height: 38vh;
+    display: flex;
+    position: relative;
+    background: white;
+    padding: 10px;
+    border-radius: 0px 0px 40px 40px;
+    align-items: center;
+}
+
+.img-product-page {
+    width: 100%;
+}
+
+.img-product-page {
+    margin-top: 35%;
+    object-fit: contain;
+    width: 100%;
+    transform: translateY(-35%);
+    height: 30vh;
+}
+
+
+
+
+/* conteudo em texto do produto */
+
+.space-loja-name-avaliacao {
+    width: 100%;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+span.avaliacao-produto {
+    font-size: 14px;
+    color: gray;
+}
+
+.space-loja-name-avaliacao span.name-loja {
+    font-size: 12px;
+    color: gray;
+}
+
+.space-title-value-product {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+h2.title-page-product {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+span.value-product-page {
+    font-size: 27px;
+}
+
+
+
+/* ESTILO PARA AS CORES DO PRODUTOS (VARIACAO) */
+.color-radio-product {
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    padding-left: 25px;
+    margin-right: 15px;
+    font-size: 13px;
+}
+
+/* Escondemos o radio original */
+.radio-test {
+    display: none;
+}
+
+/* Usamos o pseudo-element :before para recriar o novo radio */
+.color-radio-product:before {
+    content: "";
+    display: inline-block;
+ 
+    width: 16px;
+    height: 16px;
+  
+    border-radius:50%;
+ 
+    margin-right: 10px;
+    position: absolute;
+    left: 0;
+    bottom: 1px;
+    background-color: #aaa;
+    box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
+}
+
+/* CSS Responsavel por definir o estilo para radio Checkado */
+.radio-test:checked + .color-radio-product:before {
+    content: "\2022";
+    color: #f3f3f3;
+    font-size: 30px;
+    text-align: center;
+    line-height: 18px;
+}
+
+
+
+/*ESTILO PARA O SLICK*/
+
+.slick-dotted ul {
+    list-style-type: none;
+    text-align: center;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    padding: 0;
+    width: min-content;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    bottom: 32px;
+    justify-content: center;
+}
+.slick-dotted li {
+    display: inline-block;
+    margin: 0 3px;
+}
+.slick-dotted button:focus{
+    outline: 0;
+}
+.slick-dotted li button {
+    width: 9px;
+    height: 7px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: transparent;
+    border-width: 0;
+    background: #3e3e3e6b;
+    border: 1px solid white;
+    opacity: 1;
+    cursor: pointer;
+}
+li.slick-active button{
+    background: var(--main-color-datails);
+    color: transparent;
+    width: 23px;
+    transition: 0.4s;
+}
+.group-variable-product .title-variacao {
+    display: block;
+}
+
+.variacoes-product-page {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    align-items: center;
+    width: 100%;
+    column-gap: 10px;
+    row-gap: 10px;
+    padding: 15px 0;
+}
+
+.group-variable-product {
+    margin: 0 auto;
+    width: 100%;
+}
+.group-variable-product select {
+    width: 100%;
+}
+
+.group-variable-product label {
+    font-size: 14px;
+}
+
+.space-values-product-page {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+}
+
+span.percent-descont {
+    font-size: 28px;
+    font-style: italic;
+    color: var(--green-preco);
+    text-align: center;
+    margin: 0 auto;
+}
+
+.value-padrao-page-product-old{
+    color: var(--clr);
+    font-size: 17px;
+    text-decoration: line-through;
+    display: block;
+    margin-bottom: -14px;
+}
+
+.centavos-preco-produto-page-product-old {
+    font-size: 8px;
+    position: relative;
+    bottom: 6px;
+}
+
+.value-padrao-page-product{
+    color: var(--clr);
+    font-size: 35px;
+    display: block;
+    margin-bottom: -10px;
+}
+
+.centavos-preco-produto-page-product {
+    font-size: 19px;
+    position: relative;
+    bottom: 10px;
+}
+.space-content-text {
+    padding: 0 9px;
+}
+
+li.list div, li.list a {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.description-product-page {
+    padding: 10px 0;
+    margin: 20px 0;
+    margin-top: 30px;
+    border: solid 1px var(--clr);
+    border-right: none;
+    border-left: none;
+    position: relative;
+}
+
+span.title-space-description {
+    position: absolute;
+    margin: 0 auto;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--branco-roxo);
+    padding: 0 10px;
+}
+
+.qtd-product-btn {
+    padding: 8px;
+    background: var(--color-modest);
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.qtd-number {
+    font-size: 21px;
+    padding: 0px 10px;
+    border: solid 1px var(--clr);
+    border-radius: 5px;
+}
+
+.qtd-product-space {
+    padding: 20px 0;
+    text-align: center;
+}
+
+.icon-color{
+    color: var(--clr);
+}

@@ -1,0 +1,382 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+
+::before,::after {
+    box-sizing: border-box;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root {
+    --main-color-datails: #3b6fdf;
+    --main-color-transparent: #105bcc26;
+    --main-color-dark: #0a4e8d;
+    --clr: #333;
+    --branco-roxo: #E9E7F4;
+    --green-preco: #54cb5d;
+    --blue-color: #0679cb;
+    --color-modest: #1b99e2;
+    --red:#df5050;
+    --yellow: #f5b423;
+    --green: #54cb5d;
+  }
+  
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    background: #E9E7F4;
+}
+a{
+    text-decoration: none;
+}
+input, textarea {
+    border: solid 2px #dddddd;
+    height: 35px;
+    padding-left: 10px;
+    outline: none;
+    border-radius: 5px;
+}
+.btn_add {
+    padding: 7px 30px;
+    font-size: 18px;
+    border-radius: 5px;
+    background: #0cadeb;
+    border: solid 2px#07a3df;
+    color: white;
+    cursor: pointer;
+   
+}
+
+.load {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 999999;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: #0000008c;
+}
+
+
+
+
+
+/* 
+::-webkit-scrollbar {
+    background: white;
+    width: 11px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: white;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cb0f49;
+    border-radius: 20px;
+    box-shadow: -1px 0px 4px black;
+} */
+
+
+
+.btn_modal_padrao {
+    /* height: 35px; */
+    padding: 3px;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+    width: 100%;
+    border-radius: 5px;
+    font-weight: 700;
+    box-shadow: 3px 3px 7px #00000054;
+    cursor: pointer;
+}
+.btn_blue {
+    background: #0cadeb;
+    border: solid 2px#07a3df;
+    color: white;
+}
+.btn_red {
+    background: var(--red);
+    border: solid 2px#c73f3f;
+    color: white;
+}
+.btn_yellow {
+    background: var(--yellow);
+    border: solid 2px#e5a922;
+    color: white;
+}
+.btn_green {
+    background: var(--green);
+    border: solid 2px#4fc357;
+    color: white;
+}
+
+.btn_color_modest{
+    background: var(--main-color-datails);
+    border: solid 2px var(--main-color-datails);
+    color: white;
+}
+
+
+
+.flex{
+    display: flex !important;
+}
+.none{
+    display: none !important;
+}
+.block{
+    display: block !important;
+}
+
+.erroJ {
+    background: #f53f3f;
+    color: white;
+    display: none;
+}
+.atencaoJ {
+    background: #fbd958;
+    color: white;
+    display: none;
+}
+.sucessoJ {
+    background: #3ff55e;
+    color: white;
+    display: none;
+}
+
+p.notfy {
+    position: fixed;
+    z-index: 999999;
+    top: 113px;
+    width: 100%;
+    padding: 9px 55px;
+    font-weight: bold;
+    margin: 0;
+    left: 0;
+    box-shadow: 0px 4px 9px #00000036;
+    text-align: center;
+}
+
+.box-alert {
+    padding: 5px;
+    border-radius: 5px;
+    font-weight: bold;
+    width: max-content;
+    margin: 10px;
+}
+.box-alert2 {
+    background: white;
+    padding: 5px;
+    border-radius: 5px;
+    font-weight: bold;
+    width: max-content;
+    margin: 10px;
+    top: 30px;
+    transform: translateX(-50%);
+    left: 50%;
+    position: fixed;
+    z-index: 999;
+}
+.sucesso {
+    border: 4px solid #58fb8c;
+    border-left: 30px solid #58fb8c;
+    
+}
+.atencao {
+    border: 4px solid #fbd958;
+    border-left: 30px solid #fbd958;
+
+}
+.error {
+    border: 4px solid #fb5858;
+    border-left: 30px solid #fb5858;
+    
+}
+
+.corpo_erro404 {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    background-color: white;
+    justify-content: center;
+}
+
+.img_404 {
+    width: 50%;
+}
+
+.group_erro404 {
+    text-align: center;
+}
+
+.group_erro404 h2 {
+    font-size: 45px;
+}
+
+
+
+@media only screen and (max-width: 768px) {
+
+
+
+     /* PAGINA ERRO 404 */
+     .corpo_erro404 {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        flex-direction: column;
+        background-color: white;
+        justify-content: center;
+    }
+    
+    .img_404 {
+        width: 100%;
+    }
+    
+    .group_erro404 h2 {
+        font-size: 45px;
+    }
+
+
+    
+
+
+    /* CARD DOS PRODUTOS */
+
+
+    .img-produto {
+        width: 100%;
+        object-fit: contain;
+        height: 100%;
+    }
+    
+    .card-shop {
+        background: white;
+        padding: 10px;
+        width: 49%;
+        min-height: 354px;
+        max-height: 377px;
+        position: relative;
+        border-radius: 20px;
+        box-shadow: 0px 0px 7px 0px #0000001a;
+    }
+    
+    .content-card {
+        width: 100%;
+        height: 100%;
+    }
+    
+    .btn-favorite {
+        position: absolute;
+        right: 12px;
+        top: 12px;
+        font-size: 30px;
+        color: var(--blue-color);
+        border-radius: 50%;
+        align-items: center;
+    }
+    
+    .space-img-produto {
+        height: 240px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .space-title-produto {
+        text-align: left;
+        padding-bottom: 4px;
+    }
+    
+    .space-value-produto {
+        text-align: left;
+        font-weight: 500;
+    }
+    .title-produto {
+        font-size: 15px;
+        color: var(--clr);
+        font-weight: unset;
+    }
+    .value-padrao{
+        color: var(--clr);
+        font-size: 20px;
+    }
+
+    .value-promo {
+        font-size: 12px;
+        color: var(--green-preco);
+        padding-left: 4px;
+    }
+    
+    .value-parcela {
+        display: block;
+        font-size: 12px;
+        color: var(--clr);
+    }
+    
+    .value-centavos-parcela {
+        font-size: 8px;
+        position: relative;
+        bottom: 3px;
+    }
+    
+    .juros-parcela {
+        padding-left: 4px;
+    }
+
+    .centavos-preco-produto {
+        font-size: 11px;
+        position: relative;
+        bottom: 5px;
+    }
+
+    .frete-gratis {
+        font-size: 12px;
+        color: var(--green-preco);
+        display: block;
+    }
+
+
+
+
+
+
+
+    /* VERMAIS DE CADA CARROSSEL */
+
+    .space-ver-tudo {
+        padding: 5px 12px;
+        background: #f7f5fd;
+        margin: 7px 0;
+        box-shadow: 0px 2px 4px 0px #d5d5d5;
+    }
+    
+    .space-ver-tudo a {
+        color: var(--crl);
+        text-decoration: underline;
+    }
+
+
+
+
+   
+
+  
+  }

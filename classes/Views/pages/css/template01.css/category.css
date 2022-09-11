@@ -1,0 +1,23 @@
+@media only screen and (max-width: 768px) {
+    .section-destaques {
+        padding: 20px 5px;
+    }
+    
+    .title-destaques {
+        padding-bottom: 15px;
+        text-align: center;
+    }
+    
+    .text-title-detaques {
+        font-size: 23px;
+    }
+    
+    .quadro-produtos-destques {
+        display: flex;
+        grid-template-columns: repeat(2,1fr);
+        justify-content: flex-start;
+        column-gap: 7px;
+        flex-wrap: wrap;
+        row-gap: 10px;
+    }
+}

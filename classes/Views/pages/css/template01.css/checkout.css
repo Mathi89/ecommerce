@@ -1,0 +1,128 @@
+li.list div, li.list a {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+}
+
+
+.qtd-product-space {
+    padding: 20px 0;
+    text-align: center;
+    display: flex;
+    column-gap: 5px;
+    align-items: center;
+    justify-content: center;
+}
+
+.qtd-product-btn {
+    padding: 8px;
+    background: var(--color-modest);
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+
+
+.qtd-product-btn {
+    padding: 3px;
+    background: var(--color-modest);
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    font-weight: 700;
+    margin-top: 0px;
+}
+
+.space-form-checkout{
+    display: none;
+}
+
+.type-payment {
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+h4.title-type-pagto {border-bottom: solid 1px gray;margin-bottom: 12px;}
+
+img.picture-card {
+    width: 43px;
+}
+.division-details-payment {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+.select-type-payment {
+    padding-bottom: 10px;
+}
+
+img.img-qrcode-pix {
+    margin: 0 auto;
+    width: 60%;
+    display: block;
+    margin-top: 20px;
+}
+
+.inputs-form-creditcard {
+    height: 30px;
+    border: solid 1px;
+}
+
+form#form-checkout {
+    padding: 10px;
+    border-radius: 14px;
+    margin: 10px;
+}
+
+.grid-form-card.grid-card-f {
+    display: grid;
+    grid-template-columns: 77% 20%;
+    column-gap: 10px;
+    align-items: center;
+}
+
+.grid-form-card.grid-card-scd {
+    display: grid;
+    grid-template-columns: 25% 72%;
+    column-gap: 10px;
+    align-items: center;
+}
+
+.grid-form-card.grid-card-thr {
+    display: grid;
+    grid-template-columns: 64% 33%;
+    column-gap: 10px;
+    align-items: center;
+}
+
+.email-card {
+    width: 100%;
+}
+
+.select-card-parcelas {
+    width: 100%;
+}
+
+.grid-form-card {
+    margin-bottom: 10px;
+}
+
+.style-inputs-creditcard {
+    background: white;
+    padding: 0 10px;
+    height: 35px;
+    border-radius: 5px;
+    outline: none;
+    border: solid 1px gray;
+    font-size: 14px;
+}
+
+.grid-pix-space {
+    display: inline-grid;
+    width: 100%;
+}
