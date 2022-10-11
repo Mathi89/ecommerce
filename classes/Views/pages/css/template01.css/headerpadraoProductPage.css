@@ -12,7 +12,7 @@
     .content-cabecalho {
         display: grid;
         justify-content: center;
-        padding: 30px 16px;
+        padding: 15px 16px;
         align-items: center;
         grid-template-columns: 10% 80% 10%;
     }
@@ -21,16 +21,21 @@
         color: #333;
         cursor: pointer;
     }
-    .img-logo-phone {
+    /* .img-logo-phone {
         width: 100px;
+    } */
+    .logo-phone {
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
-
 
 
     /* PAGES AREA */
 
     .content-pages {
-        padding-top: 110px;
+        padding-top: 83px;
         height: calc(100vh - 75px);
         overflow-y: auto;
     }
@@ -49,11 +54,12 @@
     }
     
     .content-bottom-bar ul {
-        display: grid;
+        /* display: grid; */
         width: 100%;
         grid-template-columns: 49% 49%;
         align-items: center;
         justify-content: space-around;
+        background: #e9e7f4;
         height: 70px;
     }
     

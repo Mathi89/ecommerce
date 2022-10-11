@@ -2,6 +2,7 @@ li.list div, li.list a {
     height: 100%;
     display: flex;
     align-items: center;
+    color: var(--branco-roxo);
     justify-content: center;
     font-size: 26px;
 }
@@ -10,6 +11,32 @@ section.body-cart table {
     width: 100%;
     text-align: center;
     border-collapse: collapse;
+}
+
+.space-total-cart {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.values-cart-final {
+    font-size: 17px;
+}
+
+.total-value-cart {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--main-color-dark);
+}
+
+.descript-product {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+span.variacao-classe {
+    font-size: 15px;
 }
 
 img.picture-item-on-cart {

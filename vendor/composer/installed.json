@@ -1,6 +1,62 @@
 {
     "packages": [
         {
+            "name": "coffeecode/optimizer",
+            "version": "2.0.2",
+            "version_normalized": "2.0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/robsonvleite/optimizer.git",
+                "reference": "53c00844e3316a74f8f076b0b325ceb140d41b70"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/robsonvleite/optimizer/zipball/53c00844e3316a74f8f076b0b325ceb140d41b70",
+                "reference": "53c00844e3316a74f8f076b0b325ceb140d41b70",
+                "shasum": ""
+            },
+            "require": {
+                "ext-simplexml": "*",
+                "php": ">=7.2"
+            },
+            "time": "2021-03-21T14:08:00+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "CoffeeCode\\Optimizer\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Robson V. Leite",
+                    "email": "cursos@upinside.com.br",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Optimizer makes it easy to bookmark your site tags, open graph and twitter card",
+            "homepage": "http://www.upinside.com.br",
+            "keywords": [
+                "Coffeecode",
+                "Facebook Tags",
+                "SMO",
+                "meta tags",
+                "open graph",
+                "seo",
+                "twitter card",
+                "upinside"
+            ],
+            "support": {
+                "issues": "https://github.com/robsonvleite/optimizer/issues",
+                "source": "https://github.com/robsonvleite/optimizer/tree/2.0.2"
+            },
+            "install-path": "../coffeecode/optimizer"
+        },
+        {
             "name": "doctrine/annotations",
             "version": "1.13.3",
             "version_normalized": "1.13.3.0",

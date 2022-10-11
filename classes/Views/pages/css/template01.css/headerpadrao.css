@@ -1,10 +1,99 @@
 @import url('geral.css');
 
+.container-cabecalho-phone{
+    display: none;
+}
+
+.container-bottom-bar{
+    display: none;
+}
+
+img.logo-img-header {
+    max-width: 110px;
+    max-height: 60px;
+    object-fit: contain;
+}
+
+header.header-desktop {
+    height: 75px;
+    background: var(--branco-roxo);
+    display: flex;
+    align-items: center;
+    padding: 5px 0;
+    width: 100%;
+    position: fixed;
+    z-index: 2;
+    box-shadow: 0px 3px 8px #0000003d;
+}
+
+
+.content-cabecalho-desktop {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+ul.menus-desktop li {
+    list-style: none;
+}
+
+ul.menus-desktop li a {
+    color: var(--clr);
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+ul.menus-desktop {
+    display: flex;
+    column-gap: 45px;
+    align-items: center;
+}
+
+span.circle-qtd-itens-cart {
+    position: absolute;
+    top: -8px;
+    right: -20px;
+    background: red;
+    border-radius: 50%;
+    text-align: center;
+    color: var(--branco-roxo);
+    padding: 0px 7px;
+}
+span.carrinho-corpo {
+    position: relative;
+}
+span.menu-minhaconta i {
+    font-size: 43px;
+}
+
+span.menu-minhaconta {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+}
+
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 768px) {
+    header.header-desktop {
+        display: none;
+    }
+
+
     /* TOP BAR - CABECALHO -  */
     .container-cabecalho-phone {
         background: #ffffff;
         position: fixed;
         z-index: 1;
+        display: block;
         width: 100%;
         border-bottom: 1px solid #efefef;
         box-shadow: 0px 1px 5px #e7e7e7;
@@ -12,7 +101,7 @@
     .content-cabecalho {
         display: flex;
         justify-content: space-between;
-        padding: 30px 16px;
+        padding: 15px 16px;
         align-items: center;
     }
     .menu-phone i, .search-phone i {
@@ -20,16 +109,20 @@
         color: #333;
         cursor: pointer;
     }
-    .img-logo-phone {
+    /* .img-logo-phone {
         width: 100px;
+    } */
+    .logo-phone {
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
-
 
 
     /* PAGES AREA */
 
     .content-pages {
-        padding-top: 110px;
+        padding-top: 73px;
         height: calc(100vh - 75px);
         overflow-y: auto;
     }
@@ -42,6 +135,7 @@
         border-radius: 35px 35px 0 0;
         position: fixed;
         width: 100%;
+        display: block;
         bottom: 0;
         border-top: 1px solid #efefef;
         box-shadow: 0px -1px 5px #e7e7e7;
@@ -191,4 +285,4 @@
             animation: jump .5s linear alternate infinite;
           }
     
-    
+}

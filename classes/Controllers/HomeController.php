@@ -10,12 +10,21 @@ class HomeController extends Controller
 
 		\Router::rota('', function () {
 
-			/*DASHBOARD IMOBILIARIA*/
+			$empresa = \Painel::select('tb_admin.business','id = ?',array('1'));
+			$imgp = ($empresa['logo'] == '')? $empresa['logo'] : 'logo.png';
+			$this->seo = new \Seo('Product');
+			
+			$tags = $this->seo->render(
+				'Recargas - '.NOME_EMPRESA,
+				'Envio de códigos imediato 24h por dia. Compre em até 12 vezes no cartão de crédito. Pix, Boleto e Transferências. Adquiria o seu código e receba imediatamente através do nosso sistema de entrega imediata. Recarga',
+				INCLUDE_PATH,
+				INCLUDE_PATH.'classes/Views/imgsistem/'.$imgp
+			);
 
 				$infos = \Models\HomeModel::pagesDestaques();
 				//$imgproduct = \FeaturesCart::getImgProduct();
 				$this->view = new \Views\MainView('home');
-				$this->view->render(array($infos));
+				$this->view->render(array($infos,'tags'=>$tags));
 				echo '
 				<link rel="stylesheet" href="'.INCLUDE_CSS_T01.'slick.css">
 				<link rel="stylesheet" href="'.INCLUDE_CSS_T01.'home.css">

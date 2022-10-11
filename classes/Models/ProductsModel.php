@@ -71,6 +71,20 @@ class ProductsModel
       }
     }
 
+    public static function getVariableRecarga($idproduto)
+    {
+      $variables = \Painel::selectAllQuery('tb_admin.variacoes_produtos','WHERE id_produto = ? AND status = ?',array($idproduto,'on'));
+
+      return $variables;
+    }
+
+    public static function getItensCombo($idproduto)
+    {
+      $variables = \Painel::selectAllQuery('tb_admin.combos_itens','WHERE id_produto = ? AND status = ?',array($idproduto,'on'));
+
+      return $variables;
+    }
+
 
 
     public static function url()

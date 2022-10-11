@@ -10,10 +10,10 @@ $autoload = function ($class) {
 
 		include('classes/phpmailer/PHPMailerAutoload.php');
 	}
-	$classMP = explode('/',$class);
+	$packages = explode('/',$class);
 	
 
-	if ($classMP[0] != 'MercadoPago') {
+	if ($packages[0] != 'MercadoPago' && $packages[0] != 'CoffeeCode') {
 
 		include('classes/'.$class.'.php');
 	}

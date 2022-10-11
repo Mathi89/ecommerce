@@ -44,7 +44,19 @@ $('body').on('click', '#remove-product-minus', function () {
 
 // ADD ITEM AO CARRINHO
 $('body').on('click', '#addItemToCart', function () {
-    
+    if($(".select-variacao-recarga").length){
+      const variacaoprod = $(".select-variacao-recarga").val();
+      if(variacaoprod == null || variacaoprod == ""){
+        alertAtencao("Por favor seleciona uma opção do produto.");
+      }else{
+        postData(variacaoprod)
+      }
+
+    }else{
+      postData();
+    }
+
+    function postData(variacaoprod = false){
     const itemqtd = parseInt($("#qtd-tem").html());
     const itemid = parseInt($("#qtd-tem").data("item"));
     const urlStore = $("#title-page").data("url");
@@ -53,7 +65,7 @@ $('body').on('click', '#addItemToCart', function () {
     $.ajax({
       method: "post",
       url: urlStore+'param/addItemToCart',
-      data: {itemqtd:itemqtd, itemid:itemid},
+      data: {itemqtd:itemqtd, itemid:itemid, variacaoprod:variacaoprod},
       dataType: 'json',
       success: function (res) {
         if(res[0] == true){
@@ -66,7 +78,7 @@ $('body').on('click', '#addItemToCart', function () {
       },
   });
     
-    
+}
 })
 
 // ATUANDO NA PAGINA COM JQUERY

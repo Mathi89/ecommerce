@@ -6,6 +6,10 @@ li.list div, li.list a {
     font-size: 26px;
 }
 
+.body_checkout {
+    padding-bottom: 40px;
+}
+
 
 .qtd-product-space {
     padding: 20px 0;
@@ -16,6 +20,39 @@ li.list div, li.list a {
     justify-content: center;
 }
 
+.input-copia {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    padding: 10px 5px;
+}
+
+.input-copia input {
+    position: relative;
+}
+
+label.label-copia-click {
+    background: var(--blue-color);
+    height: 35px;
+    position: absolute;
+    z-index: 1;
+    right: 2px;
+    border-radius: 0 5px 5px 0;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    color: var(--branco-roxo);
+    cursor: pointer;
+}
+
+.space-input-copia{
+    width: 100%;
+    height: 35px;
+    position: relative;
+}
+
 .qtd-product-btn {
     padding: 8px;
     background: var(--color-modest);
@@ -23,6 +60,10 @@ li.list div, li.list a {
     color: white;
     cursor: pointer;
     font-weight: 700;
+}
+
+button#form-checkout__submit {
+    display: none;
 }
 
 
@@ -106,6 +147,17 @@ form#form-checkout {
 
 .select-card-parcelas {
     width: 100%;
+}
+
+span#valorcompra {
+    width: 100%;
+    display: block;
+    text-align: center;
+}
+
+h2#checkout-title {
+    text-align: center;
+    padding: 20px 0;
 }
 
 .grid-form-card {

@@ -23,6 +23,8 @@
 		@$telefone = $_SESSION['telefone'];
 		@$logo = $_SESSION['logo'];
 		$qtdCart = \FeaturesCart::getTotalItenCart();
+		$empresa = \Painel::getCellPhoneBd();
+
 	
 		include(BASE_DIR_PAINEL. 'templates/padrao01/' .$this->header.'.php');
 		// if($this->header == 'settingsH'){ include('pages/templates/padraoconfig01/'.$this->header.'.php');}

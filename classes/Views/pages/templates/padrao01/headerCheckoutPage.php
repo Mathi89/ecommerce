@@ -31,7 +31,7 @@ if(isset($_GET['loggout'])){
         <!--========== CSS ==========-->
         <link rel="stylesheet" href="<?= INCLUDE_CSS_T01?>headerCartPage.css">
 
-        <title><?= $arr[0]['title'] ?> - Modest Harmonic</title>
+        <title><?= $arr[0]['title'] ?></title>
     </head>
     <body>
     <p class="notfy sucessoJ"></p>
@@ -45,7 +45,7 @@ if(isset($_GET['loggout'])){
                 <i id="go-back-for-page" class='icon-color bx bx-chevron-left'></i>
               </div>
               <div class="logo-phone">
-                <img class="img-logo-phone" src="<?=INCLUDE_PATH_VIEWS?>imgsistem/logo.png">
+                <img class="img-logo-phone" src="<?= ($empresa['logo'] != "")? INCLUDE_PATH_VIEWS_PAINEL.'imgsistem/'.$empresa['logo'] : INCLUDE_PATH_VIEWS_PAINEL.'imgsistem/logo.png' ?>">
               </div>
 
               <div class="menu-phone ">

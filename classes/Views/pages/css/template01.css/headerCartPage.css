@@ -13,7 +13,7 @@
 .content-cabecalho {
     display: grid;
     justify-content: center;
-    padding: 30px 16px;
+    padding: 15px 16px;
     align-items: center;
     grid-template-columns: 10% 80% 10%;
 }
@@ -22,16 +22,18 @@
     color: #333;
     cursor: pointer;
 }
-.img-logo-phone {
+/* .img-logo-phone {
     width: 100px;
-}
+    max-height: 42px;
+    object-fit: contain;
+} */
 
 
 
 /* PAGES AREA */
 
 .content-pages {
-    padding-top: 110px;
+    padding-top: 83px;
     height: calc(100vh - 75px);
     overflow-y: auto;
 }
@@ -84,6 +86,9 @@
 
 .logo-phone {
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 

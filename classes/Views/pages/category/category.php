@@ -8,6 +8,8 @@
 
 <?php 
 $categoria = $arr[0];
+if ($arr[1] != "")
+{
 foreach ($arr[1] as $key => $card) { ?>
 
 <div class="card-shop"> <!-- COMECO DO CARD -->
@@ -35,7 +37,7 @@ foreach ($arr[1] as $key => $card) { ?>
         </div>
     </div> <!-- FIM DO CARD -->
     
-<?php } ?>
+<?php } }?>
 
 </div>
 </section>

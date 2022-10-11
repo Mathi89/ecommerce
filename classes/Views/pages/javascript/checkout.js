@@ -1,17 +1,36 @@
 // const mp = new MercadoPago("TEST-6f2af98e-a0d5-405a-97ca-bddeea4ecfdf");
 const urlStore = $("#checkout-title").data("url");
- mp = new MercadoPago("TEST-6f2af98e-a0d5-405a-97ca-bddeea4ecfdf");
+const publickey = $("#checkout-title").data("publickey");
+ mp = new MercadoPago(publickey);
 const pageUrls = $("#checkout-title").data("url");
 const totalAmount = $("#amount").data("amount");
 const valorcompra =  $("#valorcompra").data("preco").toString();
 
+$('body').on('click', '#copiar-qrcode', function (e) {
 
+    $('#qrcode-text').val();
+    $('#qrcode-text').select();
+    document.execCommand('copy');
+    alertSucesso("Qr code copiado!");
 
+    
+})
 
+$('body').on('click', '#go-back-for-page', function () {
+    goBack();
+  })
+  
+  
+  function goBack() {
+    window.history.back();
+  }
+  
 
 $('body').on('click', '#payNow', function (e) {
     const pagePagto = $(this).data("url");
     const typePagto = document.querySelector('input[name="typepayment"]:checked').value;
+    const cardpix = ".select-type-payment-pix";
+    const cardcredtcard = ".select-type-payment-credtcard";
     
     
 
@@ -23,17 +42,24 @@ $('body').on('click', '#payNow', function (e) {
             
 
 if(typePagto == "creditCard"){
+
+    $(".btn-payment-checkout span").html("Pagar Agora")
+    $("#payNow").attr('id','payofcardcredit');
+
     const page = pagePagto+typePagto+".php"
+    $(cardpix).slideUp(1000, function() {
+        $(cardpix).remove();
+    });
     
     $.ajax({
-        method: "get",
+        method: "POST",
         dataType: 'html',
         url: page, //link da pagina que o ajax buscará
         cache: false,
         success: function(data)
         {
             
-            $(".content").load(page) //Inserindo o retorno da pagina ajax
+            $(".content").html(data).fadeIn(340); //Inserindo o retorno da pagina ajax
             
         },
         error: function(data){
@@ -44,16 +70,25 @@ if(typePagto == "creditCard"){
     
 }else if(typePagto == "pix"){
 
+    $(cardcredtcard).slideUp(1000, function() {
+        $(cardcredtcard).remove();
+    });
+
+    $(".btn-payment-checkout span").html("Pagar Agora")
+    $("#payNow").attr('id','payofPix');
+
     const page = pagePagto+typePagto+".php"
 
     $.ajax({
-        method: "get",
+        method: "POST",
         dataType: 'html',
         url: page, //link da pagina que o ajax buscará
         cache: false,
         success: function(data)
         {
-            $(".content").html(data).fadeIn(340); //Inserindo o retorno da pagina ajax
+            
+            $(".content").html(data).fadeIn(340)
+            maskTelefone() //Inserindo o retorno da pagina ajax
         },
         error: function(data){
             $(".content").html("<center><p>ERRO ao carregar outra pagina</p></center>").fadeIn(300); //Em caso de erro ele exibe esta mensagem
@@ -182,4 +217,39 @@ function teste(){
 
 
 
+ 
+// FUNÕES PARA USAR GERALMENTE
 
+function alertErro(msg,temp = 3200,rl = false){
+
+    $('.erroJ').html(msg);
+    $('.erroJ').slideDown();
+    
+    setTimeout(function () {
+        $('.erroJ').slideUp();
+        if(rl != false){location.reload();}
+    }, temp)
+    }
+    
+    function alertSucesso(msg,temp = 3200,rl = false){
+    
+    $('.sucessoJ').html(msg);
+    $('.sucessoJ').slideDown();
+    
+    setTimeout(function () {
+        $('.sucessoJ').slideUp();
+        if(rl != false){location.reload();}
+    }, temp)
+    }
+    function alertAtencao(msg,temp = 3200,rl = false){
+    
+    $('.atencaoJ').html(msg);
+    $('.atencaoJ').slideDown();
+    
+    setTimeout(function () {
+        $('.atencaoJ').slideUp();
+        if(rl != false){location.reload();}
+    }, temp)
+    }
+    
+    // FIM DAS FUNÕES PARA USAR GERALMENTE

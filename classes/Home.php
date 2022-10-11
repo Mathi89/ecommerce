@@ -27,5 +27,21 @@ class Home
         return $res;
 
     }
+
+    public static function getLastProducts()
+    {
+
+        $get = Painel::selectAllQuery('tb_admin.store_products','WHERE status = ? ORDER BY id DESC',array('on'));
+        return $get;
+
+    }
+
+    public static function getCategoryName($id_categoria)
+    {
+
+        $get = Painel::select('tb_admin.store_category','id = ?',array($id_categoria))['slug'];
+        return $get;
+
+    }
 }
 ?>

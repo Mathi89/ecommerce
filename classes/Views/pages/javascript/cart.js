@@ -1,24 +1,30 @@
 $('body').on('click', '#add-product-plus', function () {
   const type = 'plus';
-  const itemid = Number($(this).data("item"));
-  const itemqtd = Number($(".qtd-item"+itemid).html());
-  
+  const itemid = $(this).data("item");
+
+  const ids = itemid.split(":");
+  const classe = ".qtd-item"+ids[0]+"-"+ids[1];
+  const itemqtd = Number($(classe).html());
+
   const urlStore = $("#urlDomain").data("url");
-  const result = editItenCart(itemid,itemqtd,urlStore,type);
+  const result = editItenCart(itemid,itemqtd,urlStore,type,ids[0],ids[1]);
   // if(result == true){
     const plus = itemqtd+1;
-    $(".qtd-item"+itemid).html(plus);
+    $(classe).html(plus);
   // }
   
 })
 
 $('body').on('click', '#remove-product-minus', function () {
   const type = 'minus';
-  const itemid = Number($(this).data("item"));
-  const itemqtd = Number($(".qtd-item"+itemid).html());
+  const itemid = $(this).data("item");
+ 
+  const ids = itemid.split(":");
+  const classe = ".qtd-item"+ids[0]+"-"+ids[1];
+  const itemqtd = $(classe).html();
 
   const urlStore = $("#urlDomain").data("url");
-  const result = editItenCart(itemid,itemqtd,urlStore,type);
+  const result = editItenCart(itemid,itemqtd,urlStore,type,ids[0],ids[1]);
   // if(result == true){
     if(itemqtd == 1){
       var plus = 1;
@@ -26,7 +32,7 @@ $('body').on('click', '#remove-product-minus', function () {
       var plus = itemqtd-1;
     }
    
-    $(".qtd-item"+itemid).html(plus);
+    $(classe).html(plus);
 
   // }
 
@@ -38,8 +44,10 @@ $('body').on('click', '#remove-product-minus', function () {
 //DELETANDO ITEM DA PAGINA DE CARRINHO
 $('body').on('click', '#delete-item-cart', function () {
 
-  const itemid = Number($(this).data("item"));
+  const itemid = $(this).data("item");
   const urlStore = $("#urlDomain").data("url");
+  const ids = itemid.split(":");
+  const classe = "#id-banner"+ids[0]+"-"+ids[1];
 
   $.ajax({
     method: "post",
@@ -66,13 +74,13 @@ $('body').on('click', '#delete-item-cart', function () {
       }
     },
 });
-$("#id-banner"+itemid).remove();
+$(classe).remove();
   
 
 })
 
 // ADD ITEM AO CARRINHO
-function editItenCart(itemid,itemqtd,urlStore,type) {
+function editItenCart(itemid,itemqtd,urlStore,type,iditem,idvariacao) {
 
   $.ajax({
     method: "post",
@@ -89,7 +97,7 @@ function editItenCart(itemid,itemqtd,urlStore,type) {
 
         $("#total-amount").html(res[2]);
         $("#total-amount-promotion").html(res[3]);
-        $("#total-amount-item"+itemid).html(res[4]);
+        $("#total-amount-item"+iditem+"-"+idvariacao).html(res[4]);
         // alertSucesso("Item adicionado ao carrinho!")
         // var returno = true;
       }else{
@@ -104,6 +112,16 @@ function editItenCart(itemid,itemqtd,urlStore,type) {
   
 
 }
+
+$('body').on('click', '#go-back-for-page', function () {
+  goBack();
+})
+
+
+function goBack() {
+  window.history.back();
+}
+
 
 
 // FUNÕES PARA USAR GERALMENTE

@@ -12,13 +12,19 @@ class CheckoutController extends Controller
 
 				$totalCompraRS = \Painel::convertMoney(\FeaturesCart::getTotalAmount());
 				$totalCompra = \FeaturesCart::getTotalAmount();
-				$this->view = new \Views\MainView('checkout','headerCheckoutPage','footerCheckoutPage');
-				$this->view->render(array($totalCompraRS,$totalCompra));
-				echo '
-				<script src="https://sdk.mercadopago.com/js/v2"></script>
-				<link rel="stylesheet" href="'.INCLUDE_CSS_T01.'checkout.css">
-				<script src="'.INCLUDE_PATH_FULL.'javascript/checkout.js"></script>
-				';	
+				if($totalCompra > 0){
+					$this->view = new \Views\MainView('checkout','headerCheckoutPage','footerCheckoutPage');
+					$this->view->render(array($totalCompraRS,$totalCompra));
+					echo '
+					<script src="https://sdk.mercadopago.com/js/v2"></script>
+					<link rel="stylesheet" href="'.INCLUDE_CSS_T01.'checkout.css">
+					<script src="'.INCLUDE_PATH_FULL.'javascript/checkout.js"></script>
+					';
+				}else{
+					\Painel::redirect(INCLUDE_PATH."cart");
+					die();
+				}
+					
 			
 		});
 		

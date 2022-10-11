@@ -16,29 +16,38 @@ class Painel
         '3' => 'Pendente',
 	];
 
-	public static $turnos = [
-		'0' => 'Manhã',
-		'1' => 'Tarde',
-		'2' => 'Noite',
+	public static $plataforma = [
+		'mfc' => 'MFC',
+		'bluetv' => 'Blue TV',
+		'redplay' => 'Red Play',
+		'tvexpress' => 'TV Express',
+		'tvpix' => 'Pix Tv'
 	];
 
-	public static $status_prospect = [
-		'0' => 'Marcou visita',
-		'1' => 'Sem interesse',
-		'2' => 'Número não existe',
-		'3' => 'Não atendeu',      
-		'4' => 'Retornar',    
-		'5' => 'Whatsapp não existe',
-		'6' => 'Instagram não existe',
-		'7' => 'Email não existe',
-		'8' => 'Mensagem enviada',
-		'9' => 'Email enviado',
-		'10' => 'Linkedin não existe',
-	];
+	public static function getNameRecarga($id)
+	{
+		$get = \Painel::select('tb_admin.plataformas_recarga','id = ?',array($id))['nome'];
+		return $get;
+	}
 
     public static function logado()
 	{
 		return isset($_SESSION['login']) ? true : false;
+	}
+
+	public static function getCellPhoneBd()
+	{
+		$select = \Painel::select('tb_admin.business','id = ?',array('1'));
+		return $select;
+	}
+
+
+
+	public static function getCellPhoneNumber($celular)
+	{
+		$tirar = array("(",")","-"," ");
+    	$tel = str_replace($tirar,"",$celular);
+		return $tel;
 	}
 
 	public static function uploadImgUser($file)
@@ -225,7 +234,7 @@ class Painel
 		}elseif($dia_num == 5){
 		$dia_nome = "Sexta";
 		}else{
-		$dia_nome = "Sábado";
+		$dia_nome = "Sbado";
 		}
 	
 		$dia_mes = date("d", $timestamp);// Dia do mês
@@ -646,7 +655,327 @@ class Painel
 
 	}
 
-	public static function newproduct($nomeproduto,$preco,$precopromotion,$description,$type,$categorias,$estoque,$slug,$foto)
+	public static function newproduct($nomeproduto,$preco,$precopromotion,$description,$type,$categorias,$estoque,$slug,$foto,$objeto)
+	{
+
+		if($objeto == "combo"){
+			$objeto = $objeto;
+		}else{
+			$objeto = "produto";
+		}
+		// VERIFICANDO SE O STATUS DA PROMOÇÃO SERÁ ATIVADA OU NÃO 
+		// COM BASE SE O VALOR PROMOTION É 0 OU NÃO
+		if($precopromotion == "0" or $precopromotion == ""){
+			$statuspromotion = 'off';
+			$precopromotion = 0;
+		}else{
+		 	$statuspromotion = 'on';
+			$precopromotion = $precopromotion;
+		}
+
+		// VERIFICANDO SE O ESTOQUE SERÁ ATIVADO OU DESATIVADO COM BASE EM 
+		// SE A QUANTIDADE DE ESTOQUE FOI DEFINIDA 
+		if($estoque == "0" or $estoque == ""){
+			$statusestoque = "off";
+			$estoque = 0;
+		}else{
+			$statusestoque = "on";
+			$estoque = $estoque;
+		}
+
+		// VERIFICANDO SE EXISTE ALGUN SLUG, SE FOR VAZIO O SISTEMA GERA UM SLUG
+		if($slug == ""){
+			$slug = $nomeproduto;
+		}else{
+			$slug = $slug;
+		}
+
+		// GERANDO UM SLUG NO FORMATO CORRETO
+		$newslug = \Painel::removeCaracterEspecial($slug);
+
+
+		// VALIDANDO PREÇOS NO FORMATO AMARICANO
+		$preco = \Painel::convertMoney($preco,"$");
+		$precopromotion = \Painel::convertMoney($precopromotion,"$");
+
+
+		$statusproduct = "on";
+
+			
+			$newslug = \Painel::newSlugOfNewProduct($newslug);
+			  
+
+		
+				// $idProduct = \Painel::select('tb_admin.store_products','slug = ?',array($newslug))['id'];
+
+				// VALIDANDO QUANTIDADE DE IMG VALIDA
+				// $qtdimg = 0;
+				// $imgValida = 0;
+				// $imgRecusada = 0;
+				// foreach ($foto as $key => $img) {
+				// 	$qtdimg++;
+
+				// 	$validandoimg = \Painel::imagemValida($img);
+				// 	if($validandoimg){
+
+				// 		$imgValida++;
+				// 	}else{
+
+				// 		$imgRecusada++;
+				// 	}
+					
+				// }
+			
+				// if($imgValida < 1){
+				// 	//SE NAO HOUVER NENHUMA IMAGEM VALIDA O PRODUTO NAO CADASTRA
+
+				// }else{
+
+				// INSERINDO PRODUTO NO BANCO DE DADOS
+				$arr = array(
+					"nome_tabela" => "tb_admin.store_products",
+					"title" => $nomeproduto,
+					"description"=> $description,
+					"value" => $preco,
+					"value_promotion" => $precopromotion,
+					"status_promotion" => $statuspromotion,
+					"category" => $categorias,
+					"views_total" => null,
+					"slug" => $newslug,
+					"frame" => null,
+					"type" => $type,
+					"status_estoque" => $statusestoque,
+					"qtdestoque" => $estoque,
+					"status" => $statusproduct,
+					"objeto"=>$objeto
+		
+				);
+				$inserir  =\Painel::insert($arr);
+
+			if($inserir){
+					
+					$idProduct = \Painel::select('tb_admin.store_products','slug = ?',array($newslug))['id'];
+				
+
+					// DEIXANDO O ARRAY DE FOTOS EM UMA ESTRUTURA CORRETA
+					$fotos = [];
+					foreach ($foto as $attrName => $valuesArray) {
+						foreach ($valuesArray as $key => $value) {
+							$fotos[$key][$attrName] = $value;
+						}
+					}
+							
+						
+				foreach ($fotos as $key => $img) {
+				//  echo ($value['name']);
+	
+					$validandoimg = \Painel::imagemValida($img);
+					if($validandoimg){
+					
+						$nameImg = \Painel::uploadImgProduct($img);
+						$arr = array(
+							"nome_tabela" => "tb_admin.imgproducts",
+							"id_produto" => $idProduct,
+							"img_produto"=> $nameImg
+				
+						);
+						$inserir  =\Painel::insert($arr);
+					}
+	
+					
+					
+				}
+
+					
+
+			}
+
+			// }
+		
+
+
+
+		return true;
+
+
+
+	}
+
+
+	public static function newproductvariacao($nomeproduto,$preco,$precopromotion,$description,$type,$categorias,$estoque,$slug,$foto,$nomevariacao,$typevariacao,$qtdvariacao,$precovariacao,$plataformarecarga,$objeto)
+	{
+		// VERIFICANDO SE O STATUS DA PROMOÇÃO SERÁ ATIVADA OU NÃO 
+		// COM BASE SE O VALOR PROMOTION É 0 OU NÃO
+		if($precopromotion == "0" or $precopromotion == ""){
+			$statuspromotion = 'off';
+			$precopromotion = 0;
+		}else{
+		 	$statuspromotion = 'on';
+			$precopromotion = $precopromotion;
+		}
+
+		// VERIFICANDO SE O ESTOQUE SER ATIVADO OU DESATIVADO COM BASE EM 
+		// SE A QUANTIDADE DE ESTOQUE FOI DEFINIDA 
+		if($estoque == "0" or $estoque == ""){
+			$statusestoque = "off";
+			$estoque = 0;
+		}else{
+			$statusestoque = "on";
+			$estoque = $estoque;
+		}
+
+		// VERIFICANDO SE EXISTE ALGUN SLUG, SE FOR VAZIO O SISTEMA GERA UM SLUG
+		if($slug == ""){
+			$slug = $nomeproduto;
+		}else{
+			$slug = $slug;
+		}
+
+		// GERANDO UM SLUG NO FORMATO CORRETO
+		$newslug = \Painel::removeCaracterEspecial($slug);
+
+
+		// VALIDANDO PREÇOS NO FORMATO AMARICANO
+		$preco = \Painel::convertMoney($preco,"$");
+		$precopromotion = \Painel::convertMoney($precopromotion,"$");
+
+
+		$statusproduct = "on";
+
+			
+			$newslug = \Painel::newSlugOfNewProduct($newslug);
+			  
+
+		
+				// $idProduct = \Painel::select('tb_admin.store_products','slug = ?',array($newslug))['id'];
+
+				// VALIDANDO QUANTIDADE DE IMG VALIDA
+				// $qtdimg = 0;
+				// $imgValida = 0;
+				// $imgRecusada = 0;
+				// foreach ($foto as $key => $img) {
+				// 	$qtdimg++;
+
+				// 	$validandoimg = \Painel::imagemValida($img);
+				// 	if($validandoimg){
+
+				// 		$imgValida++;
+				// 	}else{
+
+				// 		$imgRecusada++;
+				// 	}
+					
+				// }
+			
+				// if($imgValida < 1){
+				// 	//SE NAO HOUVER NENHUMA IMAGEM VALIDA O PRODUTO NAO CADASTRA
+
+				// }else{
+
+				// INSERINDO PRODUTO NO BANCO DE DADOS
+				$arr = array(
+					"nome_tabela" => "tb_admin.store_products",
+					"title" => $nomeproduto,
+					"description"=> $description,
+					"value" => $preco,
+					"value_promotion" => $precopromotion,
+					"status_promotion" => $statuspromotion,
+					"category" => $categorias,
+					"views_total" => null,
+					"slug" => $newslug,
+					"frame" => null,
+					"type" => $type,
+					"status_estoque" => $statusestoque,
+					"qtdestoque" => $estoque,
+					"status" => $statusproduct,
+					"objeto"=>$objeto
+		
+				);
+				$inserir  =\Painel::insert($arr);
+
+			if($inserir){
+					
+					$idProduct = \Painel::select('tb_admin.store_products','slug = ?',array($newslug))['id'];
+				
+
+					// DEIXANDO O ARRAY DE FOTOS EM UMA ESTRUTURA CORRETA
+					$fotos = [];
+					foreach ($foto as $attrName => $valuesArray) {
+						foreach ($valuesArray as $key => $value) {
+							$fotos[$key][$attrName] = $value;
+						}
+					}
+							
+						
+				foreach ($fotos as $key => $img) {
+				//  echo ($value['name']);
+	
+					$validandoimg = \Painel::imagemValida($img);
+					if($validandoimg){
+					
+						$nameImg = \Painel::uploadImgProduct($img);
+						$arr = array(
+							"nome_tabela" => "tb_admin.imgproducts",
+							"id_produto" => $idProduct,
+							"img_produto"=> $nameImg
+				
+						);
+						$inserir  =\Painel::insert($arr);
+					}
+	
+					
+					
+				}
+
+					$idProduct = \Painel::select('tb_admin.store_products','slug = ?',array($newslug))['id'];
+							$i = 0;
+							foreach ($nomevariacao as $nomevariacaotext) {
+								
+								$typevariacaoo = $typevariacao[$i];
+								$qtdvariacaoo = $qtdvariacao[$i];
+								$precovariacaoo = \Painel::convertMoney($precovariacao[$i],"$");
+								$plataformarecargah = $plataformarecarga[$i];
+								
+
+								$arrr = array(
+									'nome_tabela'=>'tb_admin.variacoes_produtos',
+									'nome'=>$nomevariacaotext,
+									'qtd_itens'=>$qtdvariacaoo,
+									'plataforma'=>$plataformarecargah,
+									'type'=>$typevariacaoo,
+									'preco'=>$precovariacaoo,
+									'id_produto'=>$idProduct,
+									'status'=>'on'
+
+								);
+								
+								
+								$insertvariacao = \Painel::insert($arrr);
+								// if($insertvariacao){
+								// 	return true;
+								// }else{
+								// 	return false;
+								// }
+								
+								$i++;
+							}
+
+						
+
+			}
+
+			// }
+		
+
+
+
+		return true;
+
+
+
+	}
+
+		public static function newproductcombo($nomeproduto,$preco,$precopromotion,$description,$type,$categorias,$estoque,$slug,$foto,$nomevariacao,$typevariacao,$qtdvariacao,$plataformarecarga,$objeto)
 	{
 		// VERIFICANDO SE O STATUS DA PROMOÇÃO SERÁ ATIVADA OU NÃO 
 		// COM BASE SE O VALOR PROMOTION É 0 OU NÃO
@@ -691,30 +1020,30 @@ class Painel
 			  
 
 		
-			// $idProduct = \Painel::select('tb_admin.store_products','slug = ?',array($newslug))['id'];
+				// $idProduct = \Painel::select('tb_admin.store_products','slug = ?',array($newslug))['id'];
 
-			// VALIDANDO QUANTIDADE DE IMG VALIDA
-			// $qtdimg = 0;
-			// $imgValida = 0;
-			// $imgRecusada = 0;
-			// foreach ($foto as $key => $img) {
-			// 	$qtdimg++;
+				// VALIDANDO QUANTIDADE DE IMG VALIDA
+				// $qtdimg = 0;
+				// $imgValida = 0;
+				// $imgRecusada = 0;
+				// foreach ($foto as $key => $img) {
+				// 	$qtdimg++;
 
-			// 	$validandoimg = \Painel::imagemValida($img);
-			// 	if($validandoimg){
+				// 	$validandoimg = \Painel::imagemValida($img);
+				// 	if($validandoimg){
 
-			// 		$imgValida++;
-			// 	}else{
+				// 		$imgValida++;
+				// 	}else{
 
-			// 		$imgRecusada++;
-			// 	}
-				
-			// }
-		
-			// if($imgValida < 1){
-			// 	//SE NAO HOUVER NENHUMA IMAGEM VALIDA O PRODUTO NAO CADASTRA
+				// 		$imgRecusada++;
+				// 	}
+					
+				// }
+			
+				// if($imgValida < 1){
+				// 	//SE NAO HOUVER NENHUMA IMAGEM VALIDA O PRODUTO NAO CADASTRA
 
-			// }else{
+				// }else{
 
 				// INSERINDO PRODUTO NO BANCO DE DADOS
 				$arr = array(
@@ -731,12 +1060,14 @@ class Painel
 					"type" => $type,
 					"status_estoque" => $statusestoque,
 					"qtdestoque" => $estoque,
-					"status" => $statusproduct
+					"status" => $statusproduct,
+					"objeto"=>$objeto
+
 		
 				);
 				$inserir  =\Painel::insert($arr);
 
-				if($inserir){
+			if($inserir){
 					
 					$idProduct = \Painel::select('tb_admin.store_products','slug = ?',array($newslug))['id'];
 				
@@ -769,6 +1100,40 @@ class Painel
 					
 					
 				}
+
+					$idProduct = \Painel::select('tb_admin.store_products','slug = ?',array($newslug))['id'];
+							$i = 0;
+							foreach ($nomevariacao as $nomevariacaotext) {
+								
+								$typevariacaoo = $typevariacao[$i];
+								$qtdvariacaoo = $qtdvariacao[$i];
+								$plataformarecargah = $plataformarecarga[$i];
+								
+
+								$arrr = array(
+									'nome_tabela'=>'tb_admin.combos_itens',
+									'nome'=>$nomevariacaotext,
+									'qtd_itens'=>$qtdvariacaoo,
+									'plataforma'=>$plataformarecargah,
+									'type'=>$typevariacaoo,
+									'id_produto'=>$idProduct,
+									'status'=>'on'
+
+								);
+								
+								
+								$insertvariacao = \Painel::insert($arrr);
+								// if($insertvariacao){
+								// 	return true;
+								// }else{
+								// 	return false;
+								// }
+								
+								$i++;
+							}
+
+						
+
 			}
 
 			// }
@@ -805,7 +1170,8 @@ class Painel
 
 	public static function removeCaracterEspecial($string)
 	{
-		$string = preg_replace('/[áàãâä]/ui', 'a', $string);
+		$string = strtolower($string);
+		$string = preg_replace('/[áàãâ]/ui', 'a', $string);
 		$string = preg_replace('/[éèêë]/ui', 'e', $string);
 		$string = preg_replace('/[íìîï]/ui', 'i', $string);
 		$string = preg_replace('/[óòõôö]/ui', 'o', $string);

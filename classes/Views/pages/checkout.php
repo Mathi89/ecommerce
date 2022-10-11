@@ -9,7 +9,7 @@ if(!file_exists('classes/config.php')){
 
 ?>
 <div class="container-checkout" data-domain="<?= DOMAIN?>">
- <h2 id="checkout-title" data-url="<?= INCLUDE_PATH ?>">checkout <span id="valorcompra" data-preco="<?= $arr[1] ?>" > <?= $arr[0] ?></span></h2>
+ <h2 id="checkout-title" data-publickey="<?= PUBLIC_KEY ?>" data-url="<?= INCLUDE_PATH ?>">checkout <span id="valorcompra" data-preco="<?= $arr[1] ?>" > <?= $arr[0] ?></span></h2>
 
  <!-- <div class="type-pagamento">
     <select id="type-pagto" name="pagto-tipo">
@@ -25,7 +25,7 @@ if(!file_exists('classes/config.php')){
  <div class="locale-types-pagto">
     <div class="type-payment">
 
-        <div class="select-type-payment">
+        <div class="select-type-payment select-type-payment-credtcard">
             <h4 class="title-type-pagto">Cartão de Crédito</h4>
             <div class="division-details-payment">
                 <input type="radio" name="typepayment" value="creditCard">
@@ -34,7 +34,7 @@ if(!file_exists('classes/config.php')){
             </div>
         </div>
 
-        <div class="select-type-payment">
+        <div class="select-type-payment select-type-payment-pix">
             <h4 class="title-type-pagto">Pix</h4>
             <div class="division-details-payment">
                 <input type="radio" name="typepayment" value="pix">

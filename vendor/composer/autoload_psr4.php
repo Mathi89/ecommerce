@@ -21,4 +21,5 @@ return array(
     'Doctrine\\Common\\Annotations\\' => array($vendorDir . '/doctrine/annotations/lib/Doctrine/Common/Annotations'),
     'Doctrine\\Common\\' => array($vendorDir . '/doctrine/common/src', $vendorDir . '/doctrine/event-manager/lib/Doctrine/Common'),
     'Complex\\' => array($vendorDir . '/markbaker/complex/classes/src'),
+    'CoffeeCode\\Optimizer\\' => array($vendorDir . '/coffeecode/optimizer/src'),
 );

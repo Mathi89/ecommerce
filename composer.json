@@ -1,6 +1,7 @@
 {
     "require": {
         "phpoffice/phpspreadsheet": "^1.18",
-        "mercadopago/dx-php": "^2.4.*"
+        "mercadopago/dx-php": "^2.4",
+        "coffeecode/optimizer": "^2.0"
     }
 }

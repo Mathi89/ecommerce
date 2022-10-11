@@ -44,6 +44,7 @@ class ComposerStaticInitec7c61f55ca92d164a3e58bb33373ebb
         'C' => 
         array (
             'Complex\\' => 8,
+            'CoffeeCode\\Optimizer\\' => 21,
         ),
     );
 
@@ -113,6 +114,10 @@ class ComposerStaticInitec7c61f55ca92d164a3e58bb33373ebb
         'Complex\\' => 
         array (
             0 => __DIR__ . '/..' . '/markbaker/complex/classes/src',
+        ),
+        'CoffeeCode\\Optimizer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/coffeecode/optimizer/src',
         ),
     );
 

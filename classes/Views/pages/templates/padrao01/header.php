@@ -31,27 +31,57 @@ if(isset($_GET['loggout'])){
         <!--========== CSS ==========-->
         <link rel="stylesheet" href="<?= INCLUDE_CSS_T01?>headerpadrao.css">
 
-        <title>Modest Harmonic</title>
+        <?= $arr['tags'] ?>
     </head>
     <body>
     <p class="notfy sucessoJ"></p>
   <p class="notfy erroJ"></p>
   <p class="notfy atencaoJ"></p>
 
-
+<!-- HEADER MOBILE -->
     <div class="container-cabecalho-phone">
           <div class="content-cabecalho">
               <div class="menu-phone">
                 <i class='bx bxs-dashboard'></i>
               </div>
               <div class="logo-phone">
-                <img class="img-logo-phone" src="<?=INCLUDE_PATH_VIEWS?>imgsistem/logo.png">
+                <img class="img-logo-phone" src="<?= ($empresa['logo'] != "")? INCLUDE_PATH_VIEWS_PAINEL.'imgsistem/'.$empresa['logo'] : INCLUDE_PATH_VIEWS_PAINEL.'imgsistem/logo.png' ?>">
               </div>
               <div class="search-phone">
                 <i class='icon-btn-search bx bx-search-alt-2'></i>
               </div>
           </div>
       </div>
+<!-- FIM HEADER MOBILE -->
+<header class="header-desktop padding-onsite">
+  <div class="content-cabecalho-desktop">
+    <div class="logo-header-space">
+      <img class="logo-img-header" src="<?= ($empresa['logo'] != "")? INCLUDE_PATH_VIEWS_PAINEL.'imgsistem/'.$empresa['logo'] : INCLUDE_PATH_VIEWS_PAINEL.'imgsistem/logo.png' ?>">
+    </div>
+    <ul class="menus-desktop">
+            
+            <li class="list ">
+                 <a href="<?= INCLUDE_PATH ?>">
+                     <span>Home</span>
+                 </a>
+             </li>
+
+             <li class="list ">
+                 <a href="<?= INCLUDE_PATH ?>cart">
+                     <span class="carrinho-corpo" >Carrinho<span id="qtd-itens-header-cart"><?php if($qtdCart > 0){?>  <span class="circle-qtd-itens-cart"><?= $qtdCart ?></span>   <?php } ?> </span></span>
+                 </a>
+             </li>
+
+             <li class="list ">
+                 <a href="<?= INCLUDE_PATH ?>">
+                     <span class="menu-minhaconta">Minha conta <i class='icon bx bxs-user-circle'></i></span>
+                 </a>
+             </li>
+    </ul>
+  </div>
+</header>
+
+
   <section class="section-all">
 
       <div class="section-pages">

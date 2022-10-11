@@ -24,14 +24,14 @@ if(!file_exists('classes/config.php')){
     </section>
 
 <?php 
-foreach ($arr[0] as $key => $destaque) { ?>
+// foreach ($arr[0] as $key => $destaque) { ?>
 
-    <section class="secao-alta"> <!-- INICIO SECTION DESTAQUES -->
+    <section class="secao-alta padding-onsite"> <!-- INICIO SECTION DESTAQUES -->
         <div class="line-fixed">
-            <p class="title-emAlta"><?= $destaque['title'] ?> na <?= NOME_EMPRESA ?></p>
+            <p class="title-emAlta">Recentes na <?= NOME_EMPRESA ?></p>
         </div>
          <div class="quadro-todos-cards"> <!-- COMECO DO QUADRO DE CARDS -->
-        <?php $res=\Home::listProducts($destaque['id']);
+        <?php $res=\Home::getLastProducts();
         foreach ($res as $key => $card) { ?>
 
             <div class="card-shop card-shop-slider-emAlta"> <!-- COMECO DO CARD -->
@@ -42,21 +42,21 @@ foreach ($arr[0] as $key => $destaque) { ?>
                     <i class='btn-favorite bx bx-heart'></i>
                 </div>
 
-                    <a href="<?= INCLUDE_PATH.$card['categoria']."/".$card['slug'] ?>"><div class="space-img-produto">
+                    <a href="<?= INCLUDE_PATH.\Home::getCategoryName($card['category'])."/".$card['slug'] ?>"><div class="space-img-produto">
                         <?php 
                         $img = \FeaturesCart::getImgProduct($card['id'],"single"); ?>
-                            <img class="img-produto" src="<?=INCLUDE_PATH_VIEWS?>imgsproducts/<?= ($img['img_produto'] == '')? 'logo.png' : $img['img_produto'] ?>">
+                            <img class="img-produto" src="<?=INCLUDE_PATH_VIEWS_PAINEL?>imgsproducts/<?= ($img['img_produto'] == '')? 'logo.png' : $img['img_produto'] ?>">
                       <?php  
 
                         ?>
                         
                     </div></a>
 
-                    <a href="<?= INCLUDE_PATH.$card['categoria']."/".$card['slug'] ?>"><div class="space-title-produto">
+                    <a href="<?= INCLUDE_PATH.\Home::getCategoryName($card['category'])."/".$card['slug'] ?>"><div class="space-title-produto">
                         <h3 class="title-produto"><?= \Painel::titleCard($card['title']) ?></h3>
                     </div></a>
 
-                    <a href="<?= INCLUDE_PATH.$card['categoria']."/".$card['slug'] ?>"><div class="space-value-produto">
+                    <a href="<?= INCLUDE_PATH.\Home::getCategoryName($card['category'])."/".$card['slug'] ?>"><div class="space-value-produto">
                         <span class="value-padrao">R$<?= \Painel::valueCard($card['status_promotion'],$card['value_promotion'],$card['value'])[0] ?><span class="centavos-preco-produto"><?= \Painel::valueCard($card['status_promotion'],$card['value_promotion'],$card['value'])[1]?></span></span>
                         <span class="value-promo"><?= \Painel::calculateDesconto($card['status_promotion'],$card['value_promotion'],$card['value']) ?></span>
                         <span class="value-parcela">em 12x R$ 3<span class="value-centavos-parcela">99</span><span class="juros-parcela">sem juros</span></span>
@@ -70,12 +70,12 @@ foreach ($arr[0] as $key => $destaque) { ?>
    
         </div><!-- FIM DO QUADRO DE CARDS -->
 
-        <div class="space-ver-tudo">
+        <!-- <div class="space-ver-tudo">
             <a href="<?= INCLUDE_PATH_COLLECTION.$destaque['slug'] ?>">Ver mais <?= $destaque['title'] ?> na <?= NOME_EMPRESA ?></a>
-        </div>
+        </div> -->
     </section><!-- FIM SECTION DESTAQUES -->
 
-<?php } ?>
+<?php //} ?>
 
 
 </div>

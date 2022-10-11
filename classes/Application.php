@@ -28,7 +28,7 @@ class Application
 				// VALIDANDO URL DE CATEGORIAS E PRODUTOS
 		}
 		
-		else if(isset($_GET['url']) AND explode('/',$_GET['url'])[0] != 'collection' AND explode('/',$_GET['url'])[0] != 'cart' AND explode('/',$_GET['url'])[0] != 'param' AND explode('/',$_GET['url'])[0] != 'checkout')
+		else if(isset($_GET['url']) AND explode('/',$_GET['url'])[0] != 'collection' AND explode('/',$_GET['url'])[0] != 'cart' AND explode('/',$_GET['url'])[0] != 'param' AND explode('/',$_GET['url'])[0] != 'notification' AND explode('/',$_GET['url'])[0] != 'checkout')
 		{
 
 			$url = explode('/',$_GET['url']);
@@ -110,7 +110,7 @@ class Application
 
 		// }
 		
-		else if(explode('/',$_GET['url'])[0] == 'collection' AND explode('/',$_GET['url'])[0] != 'cart'AND explode('/',$_GET['url'])[0] != 'param' AND explode('/',$_GET['url'])[0] != 'checkout')
+		else if(explode('/',$_GET['url'])[0] == 'collection' AND explode('/',$_GET['url'])[0] != 'cart'AND explode('/',$_GET['url'])[0] != 'param' AND explode('/',$_GET['url'])[0] != 'notification' AND explode('/',$_GET['url'])[0] != 'checkout')
 		{	
 			if(!isset(explode('/',$_GET['url'])[1]) || explode('/',$_GET['url'])[1] == '' ){$geturl1 = 'Collectiondestaques' ;}else{ $geturl1 = 'Collectiondestaques'/* explode('/',$_GET['url'])[1] */;}
 			$url = $geturl1;
@@ -181,6 +181,27 @@ class Application
 			else if(explode('/',$_GET['url'])[0] == 'checkout'){	
 
 				if(!isset(explode('/',$_GET['url'])[1]) || explode('/',$_GET['url'])[1] == '' ){$geturl1 = 'checkout' ;}else{ $geturl1 = 'checkout'/* explode('/',$_GET['url'])[1] */;}
+				$url = $geturl1;
+				$url = ucfirst($url);
+				$url.="Controller";
+				if(file_exists('classes/Controllers/'.$url.'.php')){
+				$className = "Controllers\\".$url;
+				$controller = new $className;
+				
+				$controller->executar();
+			
+		
+
+				}else {
+					
+					include(BASE_DIR_PAINEL.'erro404.php');
+					die();
+					
+				}; 
+
+			}else if(explode('/',$_GET['url'])[0] == 'notification'){	
+
+				if(!isset(explode('/',$_GET['url'])[1]) || explode('/',$_GET['url'])[1] == '' ){$geturl1 = 'notification' ;}else{ $geturl1 = 'notification'/* explode('/',$_GET['url'])[1] */;}
 				$url = $geturl1;
 				$url = ucfirst($url);
 				$url.="Controller";
